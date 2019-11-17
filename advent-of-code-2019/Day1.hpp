@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <vector>
+#include <string>
 
 #include "get_input.hpp"
 
@@ -15,25 +16,13 @@ namespace Day1 {
 	void p1(){
 
 
-		std::cout << "Running solution for part 1\n";
 
-
-
-		std::vector<std::string> track = get_lines<std::string>("day13.txt");
-
-
-		for (auto s : track) {
-			std::cout << s << "\n";
-		}
 	};
 
 
 
 	void solution() {
-
-
-
-
+		std::cout << "Running solution for Day 1 part 1\n";
 		p1();
 
 

@@ -4,7 +4,7 @@
 #include <iostream>
 
 
-#include "Day1.h"
+#include "Day1.hpp"
 
 int main()
 {

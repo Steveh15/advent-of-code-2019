@@ -20,19 +20,20 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Day1.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="get_input.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="..\inputs\day12.txt">
-      <Filter>Resource Files</Filter>
-    </Text>
-    <Text Include="..\inputs\day13.txt">
-      <Filter>Resource Files</Filter>
-    </Text>
+    <ClInclude Include="Day2.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Day3.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Day4.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Day1.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
