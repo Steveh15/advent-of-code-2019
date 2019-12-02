@@ -5,11 +5,13 @@
 
 
 #include "Day1.hpp"
+#include "Day2.hpp"
 
 int main()
 {
 
-	Day1::solution();
+	//Day1::solution();
+	Day2::solution();
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
