@@ -1,10 +1,5 @@
 #pragma once
 
-#include <iostream>
-#include <vector>
-#include <string>
-#include <algorithm>
-#include <numeric>
 
 #include "get_input.hpp"
 
