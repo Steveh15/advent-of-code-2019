@@ -11,6 +11,7 @@
 #include "Day1.hpp"
 #include "Day2.hpp"
 #include "Day3.hpp"
+#include "Day4.hpp"
 
 int main()
 {
@@ -18,4 +19,5 @@ int main()
 	//Day1::solution();
 	//Day2::solution();
 	Day3::solution();
+	//Day4::solution();
 }

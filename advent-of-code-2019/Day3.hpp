@@ -19,8 +19,6 @@ namespace Day3 {
 	};
 
 
-
-
 	std::istream& operator>>(std::istream& is, Coord& c) {
 		return is;
 	}
@@ -34,19 +32,12 @@ namespace Day3 {
 		return (abs(lhs.x) + abs(lhs.y)) < (abs(rhs.x) + abs(rhs.y));
 	}
 
-	//bool operator<(const Coord& lhs, const Coord& rhs) {
-	//	if (lhs.x != rhs.x) 
-	//		return lhs.x < rhs.x;
-	//	else return lhs.y < rhs.y;
-	//}
-
 
 	bool operator==(const Coord& lhs, const Coord& rhs) {
 		return lhs.x == rhs.x && lhs.y == rhs.y;
 	}
 
 	void solution();
-
 
 };
 
@@ -71,9 +62,6 @@ namespace std {
 	};
 
 }
-
-
-
 
 
 void Day3::solution(){
@@ -145,23 +133,18 @@ void Day3::solution(){
 
 
 	auto it = std::min_element(wire_map.begin(), wire_map.end(), [](std::pair<Coord, int> a, std::pair<Coord, int> b) {
-		
-		//return a.second > b.second;
+
 		if (a.second == 1 and b.second > 1) {
 			return false;
-		}
+		} 
 		else if (a.second > 1 and b.second == 1) {
 			return true;
-		} else return a.first < b.first;
+		}
+		else return a.first < b.first;
 
 	});
 
 	std::cout << "Part 1 solution  : " << it->first.x + it->first.y << "\n";
-
-
-
-
-
 
 
 
