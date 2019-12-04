@@ -51,10 +51,7 @@ namespace Day2 {
 		input[2] = 2;
 		int result = computer(input);
 
-		std::cout << "\n";
 		std::cout << "Part one solution : " << result << "\n";
-
-
 
 		int noun = 0;
 		int verb = -1;
@@ -77,9 +74,8 @@ namespace Day2 {
 			result = computer(input);
 		}
 
-		std::cout << "\n";
 		std::cout << "Part two solution : " << 100 * noun + verb << "\n";
-
+		std::cout << "\n";
 	}
 
 };

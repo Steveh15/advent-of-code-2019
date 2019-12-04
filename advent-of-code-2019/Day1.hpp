@@ -11,7 +11,7 @@ namespace Day1 {
 
 
 
-		std::cout << "Day 1 solutions:\n";
+		std::cout << "Day 1 solutions!\n";
 		std::vector<int> input = get_input<int>("day01.txt");
 
 		int p1 = std::accumulate(input.begin(), input.end(), 0, [](int a, int b) {
@@ -33,7 +33,7 @@ namespace Day1 {
 
 
 		std::cout << "Part two solution : " << p2 << "\n";
-
+		std::cout << "\n";
 
 	};
 

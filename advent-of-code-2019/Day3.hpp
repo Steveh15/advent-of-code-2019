@@ -173,7 +173,7 @@ void Day3::solution(){
 
 	std::cout << "Part 1 solution  : " << it1->first.x + it1->first.y << "\n";
 	std::cout << "Part 2 solution  : " << it2->second.first + it2->second.second << "\n";
-
+	std::cout << "\n";
 
 
 }
