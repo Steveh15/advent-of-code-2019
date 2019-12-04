@@ -10,14 +10,12 @@
 
 
 
-
 namespace Day3 {
 
 	struct Coord {
 		int x; 
 		int y;
 	};
-
 
 	std::istream& operator>>(std::istream& is, Coord& c) {
 		return is;
@@ -32,10 +30,15 @@ namespace Day3 {
 		return (abs(lhs.x) + abs(lhs.y)) < (abs(rhs.x) + abs(rhs.y));
 	}
 
-
 	bool operator==(const Coord& lhs, const Coord& rhs) {
 		return lhs.x == rhs.x && lhs.y == rhs.y;
 	}
+
+	void increaseX(Coord & c) {c.x += 1;}
+	void decreaseX(Coord& c) { c.x -= 1; }
+	void increaseY(Coord& c) { c.y += 1; }
+	void decreaseY(Coord& c) { c.y -= 1; }
+
 
 	void solution();
 
@@ -64,150 +67,91 @@ namespace std {
 }
 
 
+
+
 void Day3::solution(){
 
 	std::cout << "Day 3 solutions!\n";
 
 	std::vector<std::string> input_lines = get_lines("day03.txt");
-	std::string wire1 = input_lines[0];
-	std::string wire2 = input_lines[1];
-
 	std::istringstream stream1;
 
 	char c, comma;
 	int m;
 
-	std::unordered_map<Coord, int> wire_map;
-	int current_x = 0;
-	int current_y = 0;
-
-	stream1.str(wire1);
-
-	while (stream1.good()) {
-		stream1 >> c >> m >> comma;
-		for (int i = 1; i <= m; i++) {
-			if (c == 'R') {
-				current_x += 1;
-			}
-			else if (c == 'L') {
-				current_x -= 1;
-			}
-			else if (c == 'U') {
-				current_y += 1;
-			}
-			else if (c == 'D') {
-				current_y -= 1;
-			}
-			wire_map[{current_x, current_y }] = 1;
-		}
-	}
-
-	current_x = 0;
-	current_y = 0;
-
-	stream1.clear();
-	stream1.str(wire2);
-
-	while (stream1.good()) {
-		stream1 >> c >> m >> comma;
-
-		for (int i = 1; i <= m; i++) {
-
-			if (c == 'R') {
-				current_x += 1;
-			}
-			else if (c == 'L') {
-				current_x -= 1;
-			}
-			else if (c == 'U') {
-				current_y += 1;
-			}
-			else if (c == 'D') {
-				current_y -= 1;
-			}
-			wire_map[{current_x, current_y }] += 1;
-		}
-	}
-
-
-
-
-	auto it = std::min_element(wire_map.begin(), wire_map.end(), [](std::pair<Coord, int> a, std::pair<Coord, int> b) {
-
-		if (a.second == 1 and b.second > 1) {
-			return false;
-		} 
-		else if (a.second > 1 and b.second == 1) {
-			return true;
-		}
-		else return a.first < b.first;
-
-	});
-
-	std::cout << "Part 1 solution  : " << it->first.x + it->first.y << "\n";
-
-
-
-
 	std::unordered_map<Coord, std::pair<int,int>> wire_map_steps;
-	current_x = 0;
-	current_y = 0;
+	Coord current_pos = { 0, 0 };
 	int steps = 0;
+	void (*wireStep)(Coord&) = &increaseX;
 
-	stream1.clear();
-	stream1.str(wire1);
+	stream1.str(input_lines[0]);
 
 	while (stream1.good()) {
 		stream1 >> c >> m >> comma;
+
+		if (c == 'R')
+			wireStep = &increaseX;
+		else if (c == 'L')
+			wireStep = &decreaseX;
+		else if (c == 'U') 
+			wireStep = &increaseY;
+		else if (c == 'D') 
+			wireStep = &decreaseY;
+
 		for (int i = 1; i <= m; i++) {
 			steps += 1;
-			if (c == 'R') {
-				current_x += 1;
-			}
-			else if (c == 'L') {
-				current_x -= 1;
-			}
-			else if (c == 'U') {
-				current_y += 1;
-			}
-			else if (c == 'D') {
-				current_y -= 1;
-			}
-			if (wire_map_steps[{current_x, current_y }].first == 0) 
-				wire_map_steps[{current_x, current_y }].first = steps;
+			wireStep(current_pos);
 
+			if (wire_map_steps[current_pos].first == 0) 
+				wire_map_steps[current_pos].first = steps;
 		}
 	}
 
-	current_x = 0;
-	current_y = 0;
-
 	stream1.clear();
-	stream1.str(wire2);
-
+	stream1.str(input_lines[1]);
+	current_pos = { 0, 0 };
 	steps = 0;
 
 	while (stream1.good()) {
 		stream1 >> c >> m >> comma;
 
+		if (c == 'R')
+			wireStep = &increaseX;
+		else if (c == 'L')
+			wireStep = &decreaseX;
+		else if (c == 'U')
+			wireStep = &increaseY;
+		else if (c == 'D')
+			wireStep = &decreaseY;
+
 		for (int i = 1; i <= m; i++) {
 			steps += 1;
-			if (c == 'R') {
-				current_x += 1;
-			}
-			else if (c == 'L') {
-				current_x -= 1;
-			}
-			else if (c == 'U') {
-				current_y += 1;
-			}
-			else if (c == 'D') {
-				current_y -= 1;
-			}
-			if (wire_map_steps[{current_x, current_y }].second == 0)
-				wire_map_steps[{current_x, current_y }].second = steps;
+			wireStep(current_pos);
+
+			if (wire_map_steps[current_pos].second == 0)
+				wire_map_steps[current_pos].second = steps;
 		}
 	}
+
+
+
+	auto it1 = std::min_element(wire_map_steps.begin(), wire_map_steps.end(), [](std::pair<Coord, std::pair<int, int>> a, std::pair<Coord, std::pair<int, int>> b) {
+		int ls1, ls2, rs1, rs2;
+		ls1 = a.second.first;
+		ls2 = a.second.second;
+		rs1 = b.second.first;
+		rs2 = b.second.second;
+
+		if ((ls1 == 0 || ls2 == 0) and (rs1 > 0 && rs2 > 0)) {
+			return false;
+		}
+		else if ((ls1 > 0 && ls2 > 0) and (rs1 == 0 || rs2 == 0)) {
+			return true;
+		}
+		else return a.first < b.first;
+	});
+
+
 
 	auto it2 = std::min_element(wire_map_steps.begin(), wire_map_steps.end(), [](std::pair<Coord, std::pair<int, int>> a, std::pair<Coord, std::pair<int, int>> b) {
 		int ls1, ls2, rs1, rs2;
@@ -225,7 +169,10 @@ void Day3::solution(){
 		else return (a.second.first + a.second.second) < (b.second.first + b.second.second);
 	});
 
-	std::cout << "Part 2 solution  : " << it2->second.first + it2->second.second;
+
+
+	std::cout << "Part 1 solution  : " << it1->first.x + it1->first.y << "\n";
+	std::cout << "Part 2 solution  : " << it2->second.first + it2->second.second << "\n";
 
 
 
