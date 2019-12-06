@@ -23,16 +23,19 @@
     <ClInclude Include="get_input.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Day2.hpp">
+    <ClInclude Include="Day05.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Day3.hpp">
+    <ClInclude Include="Day04.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Day4.hpp">
+    <ClInclude Include="Day03.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Day1.hpp">
+    <ClInclude Include="Day02.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Day01.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

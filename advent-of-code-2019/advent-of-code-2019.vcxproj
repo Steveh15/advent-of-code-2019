@@ -162,10 +162,11 @@
     <ClCompile Include="advent-of-code-2019.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Day1.hpp" />
-    <ClInclude Include="Day2.hpp" />
-    <ClInclude Include="Day3.hpp" />
-    <ClInclude Include="Day4.hpp" />
+    <ClInclude Include="Day05.hpp" />
+    <ClInclude Include="Day01.hpp" />
+    <ClInclude Include="Day02.hpp" />
+    <ClInclude Include="Day03.hpp" />
+    <ClInclude Include="Day04.hpp" />
     <ClInclude Include="get_input.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

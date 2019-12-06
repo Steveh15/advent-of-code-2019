@@ -8,16 +8,20 @@
 #include <algorithm>
 #include <numeric>
 
-#include "Day1.hpp"
-#include "Day2.hpp"
-#include "Day3.hpp"
-#include "Day4.hpp"
+#include "Day01.hpp"
+#include "Day02.hpp"
+#include "Day03.hpp"
+#include "Day04.hpp"
+#include "Day05.hpp"
 
 int main()
 {
 
-	//Day1::solution();
-	//Day2::solution();
-	//Day3::solution();
-	//Day4::solution();
+	Day1::solution();
+	Day2::solution();
+	Day3::solution();
+	Day4::solution();
+	Day5::solution();
+
+	return 0;
 }
