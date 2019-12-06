@@ -21,7 +21,6 @@ namespace Day5 {
 			opcode = 10 * nthDigit(instruction, 2) + nthDigit(instruction, 1);
 			p1 = nthDigit(instruction, 3);
 			p2 = nthDigit(instruction, 4);
-			p3 = nthDigit(instruction, 5);
 
 			if (opcode == 3) {
 				states[states[i + 1]] = input;
@@ -37,11 +36,11 @@ namespace Day5 {
 				val2 = p2 == 0 ? states[states[i + 2]] : states[i + 2];
 
 				if (opcode == 1) {
-					if (p3 == 0) states[states[i + 3]] = val1 + val2;
+					states[states[i + 3]] = val1 + val2;
 					i += 4;
 				}
 				else if (opcode == 2) {
-					if (p3 == 0) states[states[i + 3]] = val1 * val2;
+					states[states[i + 3]] = val1 * val2;
 					i += 4;
 				}
 				else if (opcode == 5) 

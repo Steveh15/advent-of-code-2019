@@ -13,15 +13,18 @@
 #include "Day03.hpp"
 #include "Day04.hpp"
 #include "Day05.hpp"
+#include "Day06.hpp"
 
 int main()
 {
 
-	Day1::solution();
-	Day2::solution();
-	Day3::solution();
-	Day4::solution();
-	Day5::solution();
+	//Day1::solution();
+	//Day2::solution();
+	//Day3::solution();
+	//Day4::solution();
+	//Day5::solution();
+	Day6::solution();
 
 	return 0;
 }
+
