@@ -41,5 +41,8 @@
     <ClInclude Include="Day06.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Day07.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

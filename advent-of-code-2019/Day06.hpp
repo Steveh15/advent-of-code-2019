@@ -20,6 +20,8 @@ namespace Day6 {
 
 	void solution()
 	{
+
+		std::cout << "Day 6 solutions!\n";
 		std::vector<std::string> orbit_list = get_lines("day06.txt");
 
 		std::regex planet_regex("(\\w+)\\)(\\w+)");
@@ -69,7 +71,8 @@ namespace Day6 {
 		} while (common_parent == "");
 
 		auto santa_common_it = std::find(santa_parents.begin(), santa_parents.end(), common_parent);
-		std::cout << "Part two solution : " << (santa_common_it - santa_parents.begin()) + you_parents.size();
+		std::cout << "Part two solution : " << (santa_common_it - santa_parents.begin()) + you_parents.size() << "\n";
+		std::cout << "\n";
 	};
 
 }
