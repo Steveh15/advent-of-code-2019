@@ -3,6 +3,7 @@
 #include <string>
 #include <iostream>
 #include <vector>
+#include <sstream>
 
 namespace Day5 {
 
@@ -82,7 +83,7 @@ namespace Day5 {
 
 		std::cout << "Part 2 solution: \n";
 		computer(5, initial_state);
-		std::cout << "\n";
+		std::cout << "\n\n";
 	}
 
 };

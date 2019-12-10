@@ -1,7 +1,12 @@
 #pragma once
 #include <math.h>
-#include <corecrt_math_defines.h>
 #include <set>
+#include <map>
+#include <algorithm>
+#include <iostream>
+#include <vector>
+#include <corecrt_math_defines.h>
+
 
 
 
@@ -112,7 +117,8 @@ namespace Day10 {
 		}
 
 		std::cout << "Part 2 solution : " << destroyed_asteroids[199] << "\n";
-	}
 
+		std::cout << "\n";
+	}
 };
 

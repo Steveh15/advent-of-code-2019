@@ -5,6 +5,7 @@
 #include <vector>
 #include <algorithm>
 #include <map>;
+#include <sstream>
 
 namespace Day7 {
 
@@ -71,60 +72,6 @@ namespace Day7 {
 
 
 
-	void computer2(int input1, int input2, std::vector<int> states) {
-		int i, instruction, opcode, p1, p2, p3, val1, val2;
-		opcode = 0;
-		i = 0;
-		bool first_input = true;
-
-		while (opcode != 99) {
-			instruction = states[i];
-
-			opcode = 10 * nthDigit(instruction, 2) + nthDigit(instruction, 1);
-			p1 = nthDigit(instruction, 3);
-			p2 = nthDigit(instruction, 4);
-
-
-			if (opcode == 3) {
-				states[states[i + 1]] = first_input ? input1 : input2;
-				first_input = false;
-				i += 2;
-			}
-			else if (opcode == 4) {
-				output = states[states[i + 1]];
-				i += 2;
-			}
-			else if (opcode == 99);
-			else {
-				val1 = p1 == 0 ? states[states[i + 1]] : states[i + 1];
-				val2 = p2 == 0 ? states[states[i + 2]] : states[i + 2];
-
-				if (opcode == 1) {
-					states[states[i + 3]] = val1 + val2;
-					i += 4;
-				}
-				else if (opcode == 2) {
-					states[states[i + 3]] = val1 * val2;
-					i += 4;
-				}
-				else if (opcode == 5)
-					i = val1 != 0 ? val2 : i + 3;
-				else if (opcode == 6)
-					i = val1 == 0 ? val2 : i + 3;
-				else if (opcode == 7) {
-					states[states[i + 3]] = val1 < val2 ? 1 : 0;
-					i += 4;
-				}
-				else if (opcode == 8) {
-					states[states[i + 3]] = val1 == val2 ? 1 : 0;
-					i += 4;
-				}
-			}
-
-		}
-	}
-
-
 
 	void solution() {
 
@@ -165,10 +112,6 @@ namespace Day7 {
 		// No part 2 solution yet, need to learn threads first
 		// 
 
-
-		// Take an array of input
-		// When the input array increases, continue
-
-
+		std::cout << "\n";
 	}
 };

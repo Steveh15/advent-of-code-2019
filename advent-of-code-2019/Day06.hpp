@@ -1,11 +1,9 @@
 #pragma once
 
-#include <string>
-#include <iostream>
-#include <vector>
-#include <algorithm>
-#include <map>
+#include "get_input.hpp"
 #include <regex>
+#include <map>
+#include <string>
 
 namespace Day6 {
 

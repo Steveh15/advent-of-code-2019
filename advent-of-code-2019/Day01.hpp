@@ -2,6 +2,7 @@
 
 
 #include "get_input.hpp"
+#include <numeric>
 
 
 namespace Day1 {
