@@ -8,6 +8,7 @@
 #include "Day05.hpp"
 #include "Day06.hpp"
 #include "Day07.hpp"
+#include "Day08.hpp"
 
 #include "Day10.hpp"
 
@@ -15,15 +16,16 @@
 int main()
 {
 
-	Day1::solution();
-	Day2::solution();
-	Day3::solution();
-	Day4::solution();
-	Day5::solution();
-	Day6::solution();
-	Day7::solution();
+	//Day1::solution();
+	//Day2::solution();
+	//Day3::solution();
+	//Day4::solution();
+	//Day5::solution();
+	//Day6::solution();
+	//Day7::solution();
 
-	Day10::solution();
+	Day08::solution();
+	//Day10::solution();
 
 	return 0;
 }
