@@ -39,8 +39,6 @@ namespace Day10 {
 		input.push_back(".##.##.##...###.##...###");
 		input.push_back("..###.########.#.###..#.");
 
-		std::vector<std::vector<int>> asteroid_field;
-
 		std::map<int, int> asteroid_count;
 
 		// Assuming a square map
