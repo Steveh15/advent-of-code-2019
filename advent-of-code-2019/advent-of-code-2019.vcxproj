@@ -169,6 +169,7 @@
     <ClInclude Include="Day04.hpp" />
     <ClInclude Include="Day06.hpp" />
     <ClInclude Include="Day07.hpp" />
+    <ClInclude Include="Day10.hpp" />
     <ClInclude Include="get_input.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
