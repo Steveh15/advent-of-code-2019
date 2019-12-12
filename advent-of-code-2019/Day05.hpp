@@ -12,7 +12,7 @@ namespace Day5 {
 	}
 
 	void computer(int input, std::vector<int> states) {
-		int i, instruction, opcode, p1, p2, p3, val1, val2;
+		int i, instruction, opcode, p1, p2, val1, val2;
 		opcode = 0;
 		i = 0;
 
