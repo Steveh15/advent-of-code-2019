@@ -4,77 +4,91 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
-#include <map>;
+#include <map>
 #include <sstream>
+#include <queue>
 
 namespace Day7 {
-
 
 	int nthDigit(const int& i, const int& n) {
 		return (i % (int)pow(10, n)) / (int)pow(10, n - 1);
 	}
 
-	int computer(int input1, int input2, std::vector<int> states) {
-		int i, instruction, opcode, p1, p2, p3, val1, val2;
-		opcode = 0;
-		i = 0;
-		int output = 0;
-		bool first_input = true;
+	class Computer {
 
-		while (opcode != 99) {
-			instruction = states[i];
+	private:
+		std::vector<int> states;
+		int i;
+		std::queue<int> input_queue;
+		bool used_phase;
+		std::queue<int> output_queue;
 
-			opcode = 10 * nthDigit(instruction, 2) + nthDigit(instruction, 1);
-			p1 = nthDigit(instruction, 3);
-			p2 = nthDigit(instruction, 4);
+	public:
+		bool is_halted;
+		Computer(std::vector<int> _states, int _phase) : states(_states) {
+			i = 0;
+			is_halted = false;
+			input_queue.push(_phase);
+			used_phase = false;
+		};
 
-
-			if (opcode == 3) {
-				states[states[i + 1]] = first_input ? input1 : input2;
-				first_input = false;
-				i += 2;
-			}
-			else if (opcode == 4) {
-				output = states[states[i + 1]];
-				i += 2;
-			}
-			else if (opcode == 99);
-			else {
-				val1 = p1 == 0 ? states[states[i + 1]] : states[i + 1];
-				val2 = p2 == 0 ? states[states[i + 2]] : states[i + 2];
-
-				if (opcode == 1) {
-					states[states[i + 3]] = val1 + val2;
-					i += 4;
-				}
-				else if (opcode == 2) {
-					states[states[i + 3]] = val1 * val2;
-					i += 4;
-				}
-				else if (opcode == 5)
-					i = val1 != 0 ? val2 : i + 3;
-				else if (opcode == 6)
-					i = val1 == 0 ? val2 : i + 3;
-				else if (opcode == 7) {
-					states[states[i + 3]] = val1 < val2 ? 1 : 0;
-					i += 4;
-				}
-				else if (opcode == 8) {
-					states[states[i + 3]] = val1 == val2 ? 1 : 0;
-					i += 4;
-				}
-			}
-
+		int getOuput() {
+			return  output_queue.back();
 		}
-		return output;
-	}
 
+		void run(int input) {
+		
+			input_queue.push(input);
 
+			while (!is_halted) {
+				int instruction = states[i];
 
+				int opcode = 10 * nthDigit(instruction, 2) + nthDigit(instruction, 1);
+				int p1 = nthDigit(instruction, 3);
+				int p2 = nthDigit(instruction, 4);
 
+				if (opcode == 3) {
+					states[states[i + 1]] = !used_phase ? input_queue.front() : input_queue.back();
+					used_phase = true;
+					i += 2;
+				}
+				else if (opcode == 4) {
+					output_queue.push(states[states[i + 1]]);
+					i += 2;
+					return; // Halt!
+				}
+				else if (opcode == 99) is_halted = true;
+				else {
+					int val1 = p1 == 0 ? states[states[i + 1]] : states[i + 1];
+					int val2 = p2 == 0 ? states[states[i + 2]] : states[i + 2];
+
+					if (opcode == 1) {
+						states[states[i + 3]] = val1 + val2;
+						i += 4;
+					}
+					else if (opcode == 2) {
+						states[states[i + 3]] = val1 * val2;
+						i += 4;
+					}
+					else if (opcode == 5)
+						i = val1 != 0 ? val2 : i + 3;
+					else if (opcode == 6)
+						i = val1 == 0 ? val2 : i + 3;
+					else if (opcode == 7) {
+						states[states[i + 3]] = val1 < val2 ? 1 : 0;
+						i += 4;
+					}
+					else if (opcode == 8) {
+						states[states[i + 3]] = val1 == val2 ? 1 : 0;
+						i += 4;
+					}
+				}
+			}
+			return;
+		}
+	};
 
 	void solution() {
-
 
 		std::cout << "Day 7 solutions!\n";
 
@@ -91,16 +105,21 @@ namespace Day7 {
 		}
 
 		std::map<std::vector<int>, int> phase_map;
-		std::vector<int> phase = { 0,1,2,3,4};
+		std::vector<int> phase = {0,1,2,3,4};
 		std::sort(phase.begin(), phase.end());
-		int res1, res2, res3, res4, res5;
 		do {
-			res1 = computer(phase[0], 0, initial_state);
-			res2 = computer(phase[1], res1, initial_state);
-			res3 = computer(phase[2], res2, initial_state);
-			res4 = computer(phase[3], res3, initial_state);
-			res5 = computer(phase[4], res4, initial_state);
-			phase_map[phase] = res5;
+			Computer amp1(initial_state, phase[0]);
+			Computer amp2(initial_state, phase[1]);
+			Computer amp3(initial_state, phase[2]);
+			Computer amp4(initial_state, phase[3]);
+			Computer amp5(initial_state, phase[4]);
+
+			amp1.run(0);
+			amp2.run(amp1.getOuput());
+			amp3.run(amp2.getOuput());
+			amp4.run(amp3.getOuput());
+			amp5.run(amp4.getOuput());
+			phase_map[phase] = amp5.getOuput();
 		} while (std::next_permutation(phase.begin(), phase.end()));
 
 		auto max = std::max_element(phase_map.begin(), phase_map.end(), [](std::pair < std::vector<int>, int> a, std::pair < std::vector<int>, int> b) {
@@ -108,10 +127,37 @@ namespace Day7 {
 		});
 		std::cout << "Part 1 solution: " << max->second << "\n";
 
+		phase_map.clear();
+		phase = { 5,6,7,8,9};
+		std::sort(phase.begin(), phase.end());
 
-		// No part 2 solution yet, need to learn threads first
-		// 
+		do {
+			Computer amp1(initial_state, phase[0]);
+			Computer amp2(initial_state, phase[1]);
+			Computer amp3(initial_state, phase[2]);
+			Computer amp4(initial_state, phase[3]);
+			Computer amp5(initial_state, phase[4]);
+			amp1.run(0);
+			amp2.run(amp1.getOuput());
+			amp3.run(amp2.getOuput());
+			amp4.run(amp3.getOuput());
+			amp5.run(amp4.getOuput());
+			while (!amp5.is_halted) {
+				amp1.run(amp5.getOuput());
+				amp2.run(amp1.getOuput());
+				amp3.run(amp2.getOuput());
+				amp4.run(amp3.getOuput());
+				amp5.run(amp4.getOuput());
+			}
+			phase_map[phase] = amp5.getOuput();
+		} while (std::next_permutation(phase.begin(), phase.end()));
 
+		auto max2 = std::max_element(phase_map.begin(), phase_map.end(), [](std::pair < std::vector<int>, int> a, std::pair < std::vector<int>, int> b) {
+			return a.second < b.second;
+		});
+		std::cout << "Part 2 solution: " << max2->second << "\n";
 		std::cout << "\n";
+
+
 	}
 };

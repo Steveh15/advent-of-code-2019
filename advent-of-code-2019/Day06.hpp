@@ -7,15 +7,6 @@
 
 namespace Day6 {
 
-	std::string get_parent(std::string planet, std::map<std::string, std::vector<std::string>> map) {
-		auto it = std::find_if(map.begin(), map.end(), [planet](std::pair<std::string, std::vector<std::string>> kp) {
-			if (std::find(kp.second.begin(), kp.second.end(), planet) == kp.second.end()) return false;
-			else return true;
-		});
-		if (it == map.end()) return "NULL";
-		else return it->first;
-	}
-
 	void solution()
 	{
 
