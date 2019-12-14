@@ -16,17 +16,9 @@ namespace Day11 {
 		int y;
 	};
 
-	std::ostream& operator<<(std::ostream& out, const Coord& c) {
-		out << "{" << c.x << ", " << c.y << "}";
-		return out;
-	}
-
 	bool operator<(const Coord& lhs, const Coord& rhs) {
 		if (lhs.x == rhs.x) return lhs.y < rhs.y;
 		else return lhs.x < rhs.x;
-		/*if (lhs.x < rhs.x) return true;
-		else if (lhs.x == rhs.x) return lhs.y < rhs.y;
-		else return false;*/
 	};
 
 	class Robot {
@@ -68,9 +60,6 @@ namespace Day11 {
 		std::istringstream is;
 		is.str(input_str);
 
-		Robot robot;
-		std::map<Coord, int> hull;
-
 		std::vector<__int64> initial_state;
 		__int64 t;
 		char c;
@@ -79,6 +68,8 @@ namespace Day11 {
 			is >> c;
 		}
 
+		Robot robot;
+		std::map<Coord, int> hull;
 		IntCodeComputer comp1(initial_state);
 
 		while (!comp1.is_halted) {

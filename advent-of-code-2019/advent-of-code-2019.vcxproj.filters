@@ -62,5 +62,8 @@
     <ClInclude Include="IntCodeComputer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Day13.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

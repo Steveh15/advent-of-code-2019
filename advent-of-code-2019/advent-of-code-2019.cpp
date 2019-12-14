@@ -13,6 +13,7 @@
 #include "Day10.hpp"
 #include "Day11.hpp"
 #include "Day12.hpp"
+#include "Day13.hpp"
 
 
 int main()
@@ -28,9 +29,9 @@ int main()
 	//Day08::solution();
 	//Day9::solution();
 	//Day10::solution();
-	Day11::solution();
+	//Day11::solution();
 	//Day12::solution();
-
+	Day13::solution(true);
 	return 0;
 }
 
