@@ -179,6 +179,7 @@
     <ClInclude Include="Day11.hpp" />
     <ClInclude Include="Day12.hpp" />
     <ClInclude Include="get_input.hpp" />
+    <ClInclude Include="IntCodeComputer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
