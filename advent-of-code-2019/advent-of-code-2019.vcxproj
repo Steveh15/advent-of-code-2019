@@ -176,6 +176,7 @@
     <ClInclude Include="Day08.hpp" />
     <ClInclude Include="Day09.hpp" />
     <ClInclude Include="Day10.hpp" />
+    <ClInclude Include="Day11.hpp" />
     <ClInclude Include="Day12.hpp" />
     <ClInclude Include="get_input.hpp" />
   </ItemGroup>
