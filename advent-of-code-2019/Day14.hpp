@@ -27,6 +27,34 @@ namespace Day14 {
 		int amount;
 	};
 
+
+	//class NeedPile
+	//{
+	//public:
+	//	NeedPile();
+	//	~NeedPile();
+
+	//	int& operator[] (std::string item);
+
+	//private:
+	//	std::vector<std::pair<std::string, int>> need_pile;
+
+	//};
+
+	////NeedPile::NeedPile()
+	////{
+	////}
+
+	////NeedPile::~NeedPile()
+	////{
+	////}
+
+	//inline int& NeedPile::operator[](std::string item)
+	//{
+	//	
+	//}
+
+
 	void solution() {
 
 		std::cout << "Day 14 solutions!\n";
@@ -59,48 +87,61 @@ namespace Day14 {
 		std::cout << "Part 1 solution: " << "\n";
 		std::cout << "\n";
 
-		for (auto r : recipe_list) {
-			for (auto i : r.ingredients) {
-				std::cout << i.first << " " << i.second << ", ";
-			}
-			std::cout << " => " << r.product << " " << r.amount << "\n";
-		}
+		//for (auto r : recipe_list) {
+		//	for (auto i : r.ingredients) {
+		//		std::cout << i.first << " " << i.second << ", ";
+		//	}
+		//	std::cout << " => " << r.product << " " << r.amount << "\n";
+		//}
 
-		std::cout << "\n\n";
+		//std::cout << "\n\n";
 
-		std::map<std::string, int> need_pile;
+		/*std::map<std::string, int> need_pile;*/
+		std::vector<std::pair<std::string, int>> need_pile;
 		std::map<std::string, int> excess_pile;
-		need_pile["FUEL"] = 1;
+		//need_pile["FUEL"] = 1;
+		need_pile.push_back(std::make_pair("FUEL", 1));
 
 		while (std::find_if(need_pile.begin(), need_pile.end(), [](auto& a) {
 			return  a.first != "ORE" && a.second != 0;
 		}) != need_pile.end()) {
 
 		// Select first item which isn't 0;
-		std::string need_item = std::find_if(need_pile.begin(), need_pile.end(), [](auto &a) {
+		auto need_it = std::find_if(need_pile.begin(), need_pile.end(), [](auto& a) {
 			return  a.first != "ORE" && a.second != 0;
-		})->first;
+		});
+
+		std::string need_item = need_it->first;
+
 
 		// Compare to excess pile
 		int have_n = excess_pile[need_item];
-		int need_n = need_pile[need_item];
+		//int need_n = need_pile[need_item];
+		int need_n = need_it->second;
+
+		std::cout << "Need " << need_n << " " << need_item << ". Have " << have_n << "\n";
+
+
 		if (have_n >= need_n) {
-			need_pile[need_item] -= need_n;
+			//need_pile[need_item] -= need_n;
+			need_it->second -= need_n;
 			excess_pile[need_item] -= need_n;
+			need_n = 0;;
 		}
 		else {
 			// if have = 0 then nothing will happen
-			need_pile[need_item] -= have_n;
+			//need_pile[need_item] -= have_n;
+			//need_it->second -= have_n;
+			need_n -= have_n;
 			excess_pile[need_item] -= have_n;
 		}
-
 		// Buy item
 		// Find relevant recipe
 		auto need_recipe = std::find_if(recipe_list.begin(), recipe_list.end(), [need_item](auto & a) {
 			return need_item == a.product;
 		});
 		// Work out how many times you need to make recipe
-		int buy_n = 1;
+		int buy_n = 0;
 		while (buy_n * need_recipe->amount < need_n) {
 			buy_n += 1;
 		}
@@ -111,14 +152,28 @@ namespace Day14 {
 		}
 
 		// Remove item from need pile, add ingredients to need pile
-		need_pile[need_item] = 0;
+		//need_pile[need_item] = 0;
+		need_it->second = 0;
 
 		for (auto i : need_recipe->ingredients) {
-			need_pile[i.first] += buy_n * i.second;
+
+			//need_pile[i.first] += buy_n * i.second;
+
+			// Find ingredient in need pile
+			auto it = std::find_if(need_pile.begin(), need_pile.end(), [i](auto & a) {
+				return a.first == i.first;
+			});
+			if (it == need_pile.end()) {
+				//std::cout << i.first << " not currently in need pile\n";
+				need_pile.push_back(std::make_pair(i.first, buy_n * i.second));
+			}
+			else it->second += buy_n * i.second;
 		}
 
+
 		// Clean maps (useful for debugging)
-		map_erase_if(need_pile, [](auto a) { return a.second == 0; });
+		//map_erase_if(need_pile, [](auto a) { return a.second == 0; });
+		need_pile.erase(std::remove_if(need_pile.begin(), need_pile.end(), [](auto& a) { return a.second == 0;  }), need_pile.end());
 		map_erase_if(excess_pile, [](auto a) { return a.second == 0; });
 
 
@@ -134,7 +189,8 @@ namespace Day14 {
 		}
 
 
-
+		std::cout << "Yo Yo YO Need # ";
+		for (auto n : need_pile) std::cout << n.first << ": " << n.second << ", ";
 
 
 		//for (auto i : need_recipe->ingredients) {
