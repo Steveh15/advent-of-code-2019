@@ -32,8 +32,8 @@ int main()
 	//Day10::solution();
 	//Day11::solution();
 	//Day12::solution();
-	//Day13::solution(false);
-	Day14::solution();
+	//Day13::solution(false); // set true to see visualisation
+	Day14::solution(); // very slow atm
 	return 0;
 }
 
