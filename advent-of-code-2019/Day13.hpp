@@ -6,7 +6,6 @@
 #include <algorithm>
 #include <sstream>
 #include <map>
-#include <queue>
 #include <windows.h>
 #include "IntCodeComputer.h"
 
@@ -46,7 +45,7 @@ namespace Day13 {
 		std::map<int, char> draw;
 		draw[0] = ' ';
 		draw[1] = '|';
-		draw[2] = 'H';
+		draw[2] = '#';
 		draw[3] = '_';
 		draw[4] = 'O';
 
@@ -104,7 +103,6 @@ namespace Day13 {
 		comp1 = IntCodeComputer(initial_state);
 		screen.clear();
 
-		int delay = 10;
 		int score = 0;
 		int m = 0, c = 0, x_target = 22, x_current = 0, input = 0, x_collide = 0, bounce_c = 0;
 
@@ -123,7 +121,7 @@ namespace Day13 {
 					x_target = x;
 					if (visualise) {
 						drawScreen(screen, score);
-						Sleep(delay);
+						Sleep(50);
 					}
 
 				}
