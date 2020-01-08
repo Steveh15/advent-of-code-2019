@@ -15,6 +15,7 @@
 #include "Day12.hpp"
 #include "Day13.hpp"
 #include "Day14.hpp"
+#include "Day15.hpp"
 
 
 int main()
@@ -33,7 +34,8 @@ int main()
 	//Day11::solution();
 	//Day12::solution();
 	//Day13::solution(false); // set true to see visualisation
-	Day14::solution(); // very slow atm
+	//Day14::solution(); // very slow atm
+	Day15::solution();
 	return 0;
 }
 

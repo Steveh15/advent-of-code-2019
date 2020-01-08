@@ -180,6 +180,7 @@
     <ClInclude Include="Day12.hpp" />
     <ClInclude Include="Day13.hpp" />
     <ClInclude Include="Day14.hpp" />
+    <ClInclude Include="Day15.hpp" />
     <ClInclude Include="get_input.hpp" />
     <ClInclude Include="IntCodeComputer.h" />
   </ItemGroup>
